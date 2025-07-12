@@ -95,3 +95,40 @@ a19.addEventListener("mouseleave",unhovers);
 
 //dom ends
 
+//create function for add,sub,mul,divide
+function add(a,b){
+    return a+b;
+}
+
+function sub(a,b){
+    return a-b;
+}
+
+function mul(a,b){
+    return a*b;
+}
+
+function div(a,b){
+    return a/b;
+}
+
+let x;
+let y;
+let op;
+
+function operate(op,a,b){
+    if(op==='+')
+    {
+        return add(a,b);
+    }
+    else if(op==='-')
+    {
+        return sub(a,b);
+    }
+    else if(op==='*'){
+        return mul(a,b);
+    }
+    else if(op==='/'){
+        return div(a,b);
+    }
+}
