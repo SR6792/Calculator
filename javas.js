@@ -11,27 +11,63 @@ function unhovers(key){
     btn.style.backgroundColor="transparent";
     btn.style.color="black";
 }
+const out=document.querySelector(".output");//declare output globally
+//dom for hover effect and revert back to normal effect and then on click to enter value
+function outp(out)
+{
+    out.addEventListener("mouseenter",hovers);
+    out.addEventListener("mouseleave",unhovers);
+    out.addEventListener("click",()=>{
+        const res=clrd(out);
+        return res;
+    });
+}
+function clrd(opt){//function for clr and del
+    if(opt==="AC"){
+        out.textContent="";
+        x=null;
+        y=null;
+        op=null;//to ensure all values are reverted to basic
+    }
+    else if(opt==="dl"){
+        out.textContent="";
+    }
+    else{
+        out.textContent=opt;
+    }
+}
 
-//dom for hover effect and revert back to normal effect
+//the above code is to short instead of writing the entire thing
+
 const a=document.querySelector(".clr");
-a.addEventListener("mouseenter",hovers);
-a.addEventListener("mouseleave",unhovers);
+outp("AC");
 
 const a1=document.querySelector(".percent");
 a1.addEventListener("mouseenter",hovers);
 a1.addEventListener("mouseleave",unhovers);
+a1.addEventListener("click",()=>{
+    outp("%");
+});
 
 const a2=document.querySelector(".delete");
 a2.addEventListener("mouseenter",hovers);
 a2.addEventListener("mouseleave",unhovers);
+a2.addEventListener("click",()=>{
+    outp("dl");
+});
 
 const a3=document.querySelector(".divide");
 a3.addEventListener("mouseenter",hovers);
 a3.addEventListener("mouseleave",unhovers);
+a3.addEventListener("click",()=>{
+    const result=div(a,b);
+    return result;
+});
 
 const a4=document.querySelector(".seven");
 a4.addEventListener("mouseenter",hovers);
 a4.addEventListener("mouseleave",unhovers);
+a4.addEventListener("click",)
 
 const a5=document.querySelector(".eight");
 a5.addEventListener("mouseenter",hovers);
@@ -132,3 +168,11 @@ function operate(op,a,b){
         return div(a,b);
     }
 }
+//function to get result
+let eq=document.querySelector(".equal");
+eq.addEventListener("click",()=>{
+
+    const result=operate(op,a,b);
+    console.log(result);
+} );
+
