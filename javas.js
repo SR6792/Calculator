@@ -13,143 +13,162 @@ function unhovers(key){
 }
 const out=document.querySelector(".output");//declare output globally
 //dom for hover effect and revert back to normal effect and then on click to enter value
-function outp(out)
+let flag=0;//to check x and y check before op(x) and aftger (y) so flag
+function outp(btn,value)
 {
-    out.addEventListener("mouseenter",hovers);
-    out.addEventListener("mouseleave",unhovers);
-    out.addEventListener("click",()=>{
-        const res=clrd(out);
+    btn.addEventListener("mouseenter",hovers);
+    btn.addEventListener("mouseleave",unhovers);
+    btn.addEventListener("click",()=>{
+        const res=clrd(value);
         return res;
     });
 }
 function clrd(opt){//function for clr and del
     if(opt==="AC"){
-        out.textContent="";
-        x=null;
-        y=null;
+        x="";
+        y="";
+        result=null;
         op=null;//to ensure all values are reverted to basic
+        out.textContent="";
+
     }
     else if(opt==="dl"){
         out.textContent="";
     }
+    else if(opt==="eq"){
+        if(op==="+"||op==="-"||op==="*"||op==="/")
+        {
+            const result=operate(op,Number(x),Number(y));
+            out.textContent=result;
+            x=result.toString();
+            y="";
+            op="";
+            flag=0;
+        }
+        else if(x===""){
+            out.textContent="Error";
+        }
+    }
+    else if(opt==="00")
+    {
+        if(flag===0){//before flag
+            x+=opt;
+            out.textContent=x;
+        }
+        else{
+            y+=opt;
+            out.textContent=y;
+        }
+    }
+    else if((opt==="+"||opt==="-"||opt==="*"||opt==="/"))
+    {
+        if(x===""){
+            out.textContent="Enter number";
+        }
+        else{
+            flag=1;
+            op=opt;
+            out.textContent=opt;
+        }
+    }
     else{
-        out.textContent=opt;
+        if(flag===0){//before flag
+            x+=opt;
+            out.textContent=x;
+        }
+        else{
+            y+=opt;
+            out.textContent=y;
+        }
     }
 }
-
 //the above code is to short instead of writing the entire thing
 
 const a=document.querySelector(".clr");
-outp("AC");
+outp(a,"AC");
 
 const a1=document.querySelector(".percent");
-a1.addEventListener("mouseenter",hovers);
-a1.addEventListener("mouseleave",unhovers);
-a1.addEventListener("click",()=>{
-    outp("%");
-});
+outp(a1,"%");
 
 const a2=document.querySelector(".delete");
-a2.addEventListener("mouseenter",hovers);
-a2.addEventListener("mouseleave",unhovers);
-a2.addEventListener("click",()=>{
-    outp("dl");
-});
+outp(a2,"dl");
 
 const a3=document.querySelector(".divide");
-a3.addEventListener("mouseenter",hovers);
-a3.addEventListener("mouseleave",unhovers);
-a3.addEventListener("click",()=>{
-    const result=div(a,b);
-    return result;
-});
+outp(a3,"/");
 
 const a4=document.querySelector(".seven");
-a4.addEventListener("mouseenter",hovers);
-a4.addEventListener("mouseleave",unhovers);
-a4.addEventListener("click",)
+outp(a4,7);
 
 const a5=document.querySelector(".eight");
-a5.addEventListener("mouseenter",hovers);
-a5.addEventListener("mouseleave",unhovers);
+outp(a5,8);
 
 const a6=document.querySelector(".nine");
-a6.addEventListener("mouseenter",hovers);
-a6.addEventListener("mouseleave",unhovers);
+outp(a6,9);
 
 const a7=document.querySelector(".four");
-a7.addEventListener("mouseenter",hovers);
-a7.addEventListener("mouseleave",unhovers);
+outp(a7,4);
 
 const a8=document.querySelector(".five");
-a8.addEventListener("mouseenter",hovers);
-a8.addEventListener("mouseleave",unhovers);
+outp(a8,5);
 
 const a9=document.querySelector(".six");
-a9.addEventListener("mouseenter",hovers);
-a9.addEventListener("mouseleave",unhovers);
+outp(a9,6);
 
 const a10=document.querySelector(".minus");
-a10.addEventListener("mouseenter",hovers);
-a10.addEventListener("mouseleave",unhovers);
+outp(a10,"-");
 
 const a11=document.querySelector(".one");
-a11.addEventListener("mouseenter",hovers);
-a11.addEventListener("mouseleave",unhovers);
+outp(a11,1);
 
 const a12=document.querySelector(".two");
-a12.addEventListener("mouseenter",hovers);
-a12.addEventListener("mouseleave",unhovers);
+outp(a12,2);
 
 const a13=document.querySelector(".three");
-a13.addEventListener("mouseenter",hovers);
-a13.addEventListener("mouseleave",unhovers);
+outp(a13,3);
 
 const a14=document.querySelector(".add");
-a14.addEventListener("mouseenter",hovers);
-a14.addEventListener("mouseleave",unhovers);
+outp(a14,"+");
 
 const a15=document.querySelector(".double0");
-a15.addEventListener("mouseenter",hovers);
-a15.addEventListener("mouseleave",unhovers);
+outp(a15,"00");
 
 const a16=document.querySelector(".zero");
-a16.addEventListener("mouseenter",hovers);
-a16.addEventListener("mouseleave",unhovers);
+outp(a16,0);
 
 const a17=document.querySelector(".decimal");
-a17.addEventListener("mouseenter",hovers);
-a17.addEventListener("mouseleave",unhovers);
+outp(a17,".");
 
 const a18=document.querySelector(".equal");
-a18.addEventListener("mouseenter",hovers);
-a18.addEventListener("mouseleave",unhovers);
+outp(a18,"eq");
 
 const a19=document.querySelector(".multiply");
-a19.addEventListener("mouseenter",hovers);
-a19.addEventListener("mouseleave",unhovers);
+outp(a19,"*");
 
 //dom ends
-
+let result;
 //create function for add,sub,mul,divide
 function add(a,b){
-    return a+b;
+    result=a+b;
+    return result;
 }
 
 function sub(a,b){
-    return a-b;
+    result=a-b;
+    return result;
 }
 
 function mul(a,b){
-    return a*b;
+    result=a*b;
+    return result;
 }
 
 function div(a,b){
-    return a/b;
+    result=a/b;
+    return result;
 }
 
-let x;
-let y;
+let x="";
+let y="";
 let op;
 
 function operate(op,a,b){
@@ -169,10 +188,4 @@ function operate(op,a,b){
     }
 }
 //function to get result
-let eq=document.querySelector(".equal");
-eq.addEventListener("click",()=>{
-
-    const result=operate(op,a,b);
-    console.log(result);
-} );
 
